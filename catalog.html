@@ -29,6 +29,13 @@
   </nav>
   <h1>Покупки і їх ціна</h1>
   <h1>Bee Swarm Simulator</h1>
+  <label for="price-filter">Фільтр за ціною:</label>
+  <select id="price-filter" onchange="filterItemsByPrice(parseInt(this.value))">
+    <option value="9999">Усі</option>
+    <option value="100">До 100 грн</option>
+    <option value="200">До 200 грн</option>
+    <option value="300">До 300 грн</option>
+  </select>
 
   <div class="gallery">
     <div class="item">
@@ -36,7 +43,7 @@
         src="data:image/jpeg;base64,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"
         alt="Фото 1">
       <div class="price">Ціна: 100 грн</div>
-       <button onclick="addToCart('Diamond Mask', 100)">Додати в кошик</button>
+      <button onclick="addToCart('Diamond Mask', 100)">Додати в кошик</button>
     </div>
     <div class="item">
       <img
@@ -160,74 +167,28 @@
       </div>
     </div>
     <div class="cart">
-  <h2>🛒 Кошик</h2>
-  <ul id="cart-list"></ul>
-  <p><strong>Загальна сума:</strong> <span id="total">0</span> ₴</p>
-  
-  <h3>👤 Введіть ваш нік Roblox:</h3>
-  <input type="text" id="roblox-nick" placeholder="Ваш нік у Roblox">
+      <h2>🛒 Кошик</h2>
+      <ul id="cart-list"></ul>
+      <p><strong>Загальна сума:</strong> <span id="total">0</span> ₴</p>
 
-  <h3>💳 Спосіб оплати:</h3>
-  <select id="payment-method">
-    <option value="mono">MonoPay</option>
-    <option value="paypal">PayPal</option>
-    <option value="robux">Оплата Robux-ом</option>
-  </select>
+      <h3>👤 Введіть ваш нік Roblox:</h3>
+      <input type="text" id="roblox-nick" placeholder="Ваш нік у Roblox">
 
-  <button class="checkout" onclick="checkout()">Замовити</button>
-</div>
+      <h3>💳 Спосіб оплати:</h3>
+      <select id="payment-method">
+        <option value="mono">MonoPay</option>
+        <option value="paypal">PayPal</option>
+        <option value="robux">Оплата Robux-ом</option>
+      </select>
 
-<script>
-  let cart = [];
-  let total = 0;
+      <button class="checkout" onclick="checkout()">Замовити</button>
+    </div>
 
-  function addToCart(item, price) {
-    cart.push({ item, price });
-    total += price;
-    updateCartDisplay();
-  }
-
-  function updateCartDisplay() {
-    const cartList = document.getElementById("cart-list");
-    const totalEl = document.getElementById("total");
-    cartList.innerHTML = "";
-    cart.forEach(entry => {
-      const li = document.createElement("li");
-      li.textContent = `${entry.item} — ${entry.price}₴`;
-      cartList.appendChild(li);
-    });
-    totalEl.textContent = total;
-  }
-
-  function checkout() {
-    const nick = document.getElementById("roblox-nick").value;
-    const payment = document.getElementById("payment-method").value;
-
-    if (!nick) {
-      alert("Введіть свій нік у Roblox!");
-      return;
-    }
-
-    if (cart.length === 0) {
-      alert("Кошик порожній.");
-      return;
-    }
-
-    alert(`✅ Замовлення оформлено!\nНік: ${nick}\nСума: ${total}₴\nОплата: ${payment}`);
-    // Тут можна додати збереження або відправку на сервер
-  }
-</script>
-
-
-
-
-
-
-
-
-
-
-
+    <div id="cart-container">
+      <h2>🛒 Кошик</h2>
+      <ul id="cart-items"></ul>
+      <p>Загальна сума: <span id="total-price">0</span> грн</p>
+    </div>
 
 </body>
 
