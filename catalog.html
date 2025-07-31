@@ -29,6 +29,13 @@
   </nav>
   <h1>Покупки і їх ціна</h1>
   <h1>Bee Swarm Simulator</h1>
+  <label for="price-filter">Фільтр за ціною:</label>
+  <select id="price-filter" onchange="filterItemsByPrice(parseInt(this.value))">
+    <option value="9999">Усі</option>
+    <option value="100">До 100 грн</option>
+    <option value="200">До 200 грн</option>
+    <option value="300">До 300 грн</option>
+  </select>
 
   <div class="gallery">
     <div class="item">
@@ -210,9 +217,9 @@
 
 
     <div class="cart">
-      <h2>🛒 Кошик</h2>
-      <ul id="cart-list"></ul>
-      <p><strong>Загальна сума:</strong> <span id="total">0</span> ₴</p>
+  <h2>🛒 Кошик</h2>
+<ul id="cart-list"></ul>
+<p><strong>Загальна сума:</strong> <span id="total">0</span> ₴</p>
 
       <h3>👤 Введіть ваш нік Roblox:</h3>
       <input type="text" id="roblox-nick" placeholder="Ваш нік у Roblox">
@@ -240,10 +247,26 @@
 
 
 
+>>>>>>> 2c69bd54a26c01eeebc66875dc2fdc8944a2e09f
 
+      <h3>👤 Введіть ваш нік Roblox:</h3>
+      <input type="text" id="roblox-nick" placeholder="Ваш нік у Roblox">
 
+      <h3>💳 Спосіб оплати:</h3>
+      <select id="payment-method">
+        <option value="mono">MonoPay</option>
+        <option value="paypal">PayPal</option>
+        <option value="robux">Оплата Robux-ом</option>
+      </select>
 
+      <button class="checkout" onclick="checkout()">Замовити</button>
+    </div>
 
+    <div id="cart-container">
+      <h2>🛒 Кошик</h2>
+      <ul id="cart-items"></ul>
+      <p>Загальна сума: <span id="total-price">0</span> грн</p>
+    </div>
 
 </body>
 
