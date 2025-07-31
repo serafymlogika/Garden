@@ -1,9 +1,5 @@
 let cart = [];
-<<<<<<< HEAD
 let total = -20;
-=======
-let total = 0;
->>>>>>> ff985730e57e873cfcb1c78825db699e73acfa74
 
 function addToCart(item, price) {
     cart.push({ item, price });
@@ -38,12 +34,6 @@ function checkout() {
     }
 
     alert(`✅ Замовлення оформлено!\nНік: ${nick}\nСума: ${total}₴\nОплата: ${payment}`);
-<<<<<<< HEAD
     location.reload();
     // Тут можна додати збереження або відправку на сервер
 }
-=======
-    // Тут можна додати збереження або відправку на сервер
-}
-
->>>>>>> ff985730e57e873cfcb1c78825db699e73acfa74
