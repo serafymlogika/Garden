@@ -1,42 +1,42 @@
 let cart = [];
-let total = 0;
+let total = -20;
 
-function addToCart(item, price) {
-    const existingItem = cart.find(entry => entry.item === item);
-    if (existingItem) {
-        existingItem.quantity += 1;
+function addToCart(button) {
+    const itemBlock = button.closest(".item");
+
+    const itemName = itemBlock.querySelector("img").alt;
+    const count = parseInt(itemBlock.querySelector(".count").textContent);
+    let price = itemBlock.querySelector('.priceNUM').innerHTML;
+    if (count > 0) {
+        cart.push({ item: itemName, price });
+        total += price;
+        updateCartDisplay();
+
+        // Зменшуємо кількість в наявності на 1
+        itemBlock.querySelector(".count").textContent = count - 1;
     } else {
-        cart.push({ item, price, quantity: 1 });
+        alert("❌ Недостатньо товару в наявності!");
     }
-    updateTotal();
-    updateCartDisplay();
-}
-
-function updateTotal() {
-    total = cart.reduce((sum, entry) => sum + entry.price * entry.quantity, 0);
 }
 
 function updateCartDisplay() {
     const cartList = document.getElementById("cart-list");
-    const totalEl = document.getElementById("total");
+    const totalEl = document.querySelector("#total");
     cartList.innerHTML = "";
+    let total = 0;
 
-    cart.forEach(entry => {
+    for (let item of cart) {
+        console.log("Item:", item); // додайте для перевірки
+        total += item.price * item.quantity;
+
         const li = document.createElement("li");
-
-        const quantitySpan = document.createElement("span");
-        quantitySpan.textContent = ` × ${entry.quantity}`;
-        quantitySpan.style.fontWeight = "bold";
-        quantitySpan.style.marginLeft = "5px";
-
-        li.textContent = `${entry.item} — ${entry.price}₴`;
-        li.appendChild(quantitySpan);
-
+        li.textContent = `${item.item} - ${item.price} грн`;
         cartList.appendChild(li);
-    });
+    }
 
-    totalEl.textContent = total;
+    totalEl.innerHTML = total;
 }
+
 
 function checkout() {
     const nick = document.getElementById("roblox-nick").value;
@@ -52,6 +52,20 @@ function checkout() {
         return;
     }
 
-    alert(`✅ Замовлення оформлено!\nНік: ${nick}\nСума: ${total}₴\nОплата: ${payment}`);
-    location.reload();
+    const bonus = 20;
+    const finalTotal = Math.max(total - bonus, 0); // Щоб не було від'ємної суми
+
+    alert(
+        `✅ Замовлення оформлено!\n` +
+        `Нік: ${nick}\n` +
+        `Сума: ${total}₴\n` +
+        `Бонус: -${bonus}₴\n` +
+        `До сплати: ${finalTotal}₴\n` +
+        `Оплата: ${payment}`
+    );
+
+    // Тут можна зберегти замовлення на сервер або локально
+
+    location.reload(); // Оновлюємо сторінку
+    window.location.replace("./catalog.html"); // Повернення до каталогу
 }
